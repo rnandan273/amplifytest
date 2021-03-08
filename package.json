@@ -1,5 +1,14 @@
 {
 	"name": "cljapp",
-	"dependencies": {},
-	"devDependencies": {}
+	"dependencies": {
+		"aws-amplify": "^3.3.22",
+		"aws-amplify-react": "^4.2.26",
+		"highlight.js": "9.18.1",
+		"react": "17.0.1",
+		"react-dom": "17.0.1",
+		"react-highlight.js": "1.0.7"
+	},
+	"devDependencies": {
+		"shadow-cljs": "2.11.21"
+	}
 }

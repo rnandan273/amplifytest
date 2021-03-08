@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "cljapp65b62edc": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
