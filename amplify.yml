@@ -23,8 +23,3 @@ frontend:
       commands: [lein prod]
   artifacts:
     baseDirectory: resources/public/
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
