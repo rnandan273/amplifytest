@@ -22,4 +22,4 @@ frontend:
     build:
       commands: [lein prod]
   artifacts:
-    baseDirectory: dist
+    baseDirectory: ./
