@@ -16,8 +16,9 @@
 
 (def root-view
   (reagent/adapt-react-class
-   (withAuthenticator
-    (reagent/reactify-component views/main-panel) true)))
+   ;(withAuthenticator
+    (reagent/reactify-component views/main-panel) ;true)
+   ))
 
 (defn ^:dev/after-load mount-root []
   (re-frame/clear-subscription-cache!)
