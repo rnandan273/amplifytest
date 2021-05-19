@@ -1,12 +1,13 @@
 (defproject cljapp "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.10.3"]
+  :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/clojurescript "1.10.773"
                   :exclusions [com.google.javascript/closure-compiler-unshaded
                                org.clojure/google-closure-library
                                org.clojure/google-closure-library-third-party]]
-                 [thheller/shadow-cljs "2.11.21"]
+                 [thheller/shadow-cljs "2.11.7"]
                  [reagent "0.10.0"]
-                 [re-frame "1.2.0"]
+                 [re-frame "1.1.2"]
+                 [metosin/reitit "0.5.12"]
                  [day8.re-frame/tracing "0.6.0"]]
 
   :plugins [[lein-shadow "0.3.1"]
@@ -70,7 +71,7 @@
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "1.0.2"]
-                   [day8.re-frame/re-frame-10x "1.0.1"]]
+                   [day8.re-frame/re-frame-10x "0.7.0"]]
     :source-paths ["dev"]}
 
    :prod {}
