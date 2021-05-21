@@ -18,33 +18,6 @@
      :on-click (fn [] (swap! state inc))}
     "count up"]])
 
-(defn account []
-  [:div.section
-   [:div.container.is-fluid.mt-5.pt-5
-     [:div.level.is-mobile
-      [:div.level-left 
-       [:div.level-item 
-       [:> ui/Menu {:vertical true}
-       [:> ui/MenuItem
-         [:> ui/MenuHeader "Accounts"]
-          [:> ui/MenuMenu
-           [:> ui/MenuItem {:on-click #()} "Settings"]
-           [:> ui/MenuItem {:on-click #()}"Plans"]]]
-       [:> ui/MenuItem
-        [:> ui/MenuHeader "Messages"]
-        [:> ui/MenuMenu
-         [:> ui/MenuItem {:on-click #()}"Requested"]
-         [:> ui/MenuItem {:on-click #()}"Scheduled"]
-         [:> ui/MenuItem {:on-click #()}"Create"]]]
-       [:> ui/MenuItem
-        [:> ui/MenuHeader "Chats"]
-        [:> ui/MenuMenu
-         [:> ui/MenuItem {:on-click #()}"Requested"]
-         [:> ui/MenuItem {:on-click #()}"Scheduled"]
-         [:> ui/MenuItem {:on-click #()}"Create"]]]]]]
-      
-     [:div.level-item {:style {:background-color "white"}} "Details"]]]])
-
 
  
 (defn navbar []
@@ -65,161 +38,661 @@
        (str "Please ")[:a {:href link :style {:color "red" :margin "0% 0.5% 0% 0.5%"}} "click here"] (str description)]]]])
   
 (defn home-page []
-  [:div.section
-    [:div.container.is-fluid.mt-5.pt-5
-     
-    [:div.box [:div.columns.is-centered.is-vcentered
-     [:div.column
-      [:div.title.is-8.has-text-info {:style {:text-align "center"}}
-       (str "Welcome to the Worlds first micro-consulting platform")]]]]
+  (fn []
+    [:div.section
+     [:div.container.is-fluid.mt-5.pt-5
 
-    [item (str "Your expertise can help someone, somewhere in the world and we can help you to monetize your expertise")
-     "/#/signup"
-     "to sign up as a provider"]
+      [:div.box [:div.columns.is-centered.is-vcentered
+                 [:div.column
+                  [:div.title.is-8.has-text-info {:style {:text-align "center"}}
+                   (str "Welcome to the Worlds first micro-consulting platform")]]]]
 
-     [item (str "Are you looking at a Job at a certain company?")
-      "/#/signup"
-      "and we can connect you with an employee at that company that can help you"]
-     
-     [item (str "Are you planning to pursue higher education at a certain college?")
-      "/#/signup"
-      "and we can connect you with an current or former student or faculty at that college who can answer all your questions"]
+      [item (str "Your expertise can help someone, somewhere in the world and we can help you to monetize your expertise")
+       "/#/signup"
+       "to sign up as a provider"]
 
-   [item (str "Are you a Recruiter?")
-    "/#/signup"
-    "and we can connect you with employees at any company that you want to target"]
+      [item (str "Are you looking at a Job at a certain company?")
+       "/#/signup"
+       "and we can connect you with an employee at that company that can help you"]
 
-    [item (str "Are you a Private Tutor?")
-     "/#/signup"
-     "and we can help streamline and monetize your outside the classroom communications with all your students"]
+      [item (str "Are you planning to pursue higher education at a certain college?")
+       "/#/signup"
+       "and we can connect you with an current or former student or faculty at that college who can answer all your questions"]
 
-    [item (str "Are you a Doctor??")
-     "/#/signup"
-     "and we can help streamline and monetize your outside the clinic communications with all your patients"]
+      [item (str "Are you a Recruiter?")
+       "/#/signup"
+       "and we can connect you with employees at any company that you want to target"]
 
-     ]])
+      [item (str "Are you a Private Tutor?")
+       "/#/signup"
+       "and we can help streamline and monetize your outside the classroom communications with all your students"]
+
+      [item (str "Are you a Doctor??")
+       "/#/signup"
+       "and we can help streamline and monetize your outside the clinic communications with all your patients"]]]
+    ))
 
 (defn login-page []
-  [:div.section
-    [:div.container.is-fluid.mt-5.pt-5
-    [:div.columns.is-centered.mt-5
-     [:div.column]
-     [:div.column.is-4.m-1
-      [:label.box.label.is-medium.has-text-centered "Sign In"]]
-     [:div.column]]
+  (fn []
+    [:div.section
+     [:div.container.is-fluid.mt-5.pt-5
+      [:div.columns.is-centered.mt-5
+       [:div.column]
+       [:div.column.is-4.m-1
+        [:label.box.label.is-medium.has-text-centered "Sign In"]]
+       [:div.column]]
 
-    [:div.columns.is-entered
-     [:div.column]
-     [:div.column.is-4.m-1
-      [:form.box
-       [:div.field
-        [:label.label "Email"]
-        [:input.input {:type "email" :placeholder "e.g bobsmith@gmail.com"}]]
-       [:div.field
-        [:label.label "Password"]
-        [:input.input {:type "password" :placeholder "***********" :required true}]]
-       [:div.field
-        [:label.label.is-info "Forgot Password?"]]
-       [:div.columns.is-centered.is-mobile
-        [:div.column.is-offset-1
-         [:button.button
-          [:a {:href "/#/"} "Back"]]]
-        [:div.column.is-offset-1
-         [:button.button
-          [:a {:href "/#/user-account"} "Sign In"]]]]]]
-     [:div.column]]]])
+      [:div.columns.is-entered
+       [:div.column]
+       [:div.column.is-4.m-1
+        [:form.box
+         [:div.field
+          [:label.label "Email"]
+          [:input.input {:type "email" :placeholder "e.g bobsmith@gmail.com"}]]
+         [:div.field
+          [:label.label "Password"]
+          [:input.input {:type "password" :placeholder "***********" :required true}]]
+         [:div.field
+          [:label.label.is-info "Forgot Password?"]]
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-offset-1
+           [:button.button
+            [:a {:href "/#/"} "Back"]]]
+          [:div.column.is-offset-1
+           [:button.button
+            [:a {:href "/#/user-account"} "Sign In"]]]]]]
+       [:div.column]]]]))
 
 
 (defn signup-page []
-  [:div.section
-    [:div.container.is-fluid.mt-5.pt-5
-     [:div.columns.is-centered
-      [:div.column.is-5
-       [:label.box.label.is-medium.has-text-centered "Sign Up"]]]
-     [:div.columns.is-centered
-      [:div.column.is-5
-       [:form.box
-        [:div.field
-         [:label.label "First Name"]
-         [:input.input {:type "text" :placeholder "First Name"}]]
+  (fn []
+    [:div.section
+     [:div.container.is-fluid.mt-5.pt-5
+      [:div.columns.is-centered
+       [:div.column.is-5
+        [:label.box.label.is-medium.has-text-centered "Sign Up"]]]
+      [:div.columns.is-centered
+       [:div.column.is-5
+        [:form.box
+         [:div.field
+          [:label.label "First Name"]
+          [:input.input {:type "text" :placeholder "First Name"}]]
 
-        [:div.field
-         [:label.label "Last Name"]
-         [:input.input {:type "text" :placeholder "Last Name"}]]
-        [:div.field
-         [:label.label "Email"]
-         [:input.input {:type "text" :placeholder "Email"}]]
-        [:div.field
-         [:label.label "Select Password"]
-         [:input.input {:type "password" :placeholder "Select Password"}]]
-        [:div.field
-         [:label.label "Repeat Password"]
-         [:input.input {:type "password" :placeholder "Repeat Password"}]]
-        [:div.field
-         [:label.label "Time Zone"]
-         [:input.input {:type "text" :placeholder "Time Zone"}]]
-        [:div.field
-         [:label.checkbox
-          [:input.mr-2 {:type "checkbox"}]
-          "I have read and agree with your"
-          [:a {:href "#"} "terms of service"]
-          [:a {:href "#"} "privacy policy"]]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-offset-1
-          [:button.button
-           [:a {:href "/#/"} "Back"]]]
-         [:div.column.is-offset-1
-          [:button.button
-           [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]])
+         [:div.field
+          [:label.label "Last Name"]
+          [:input.input {:type "text" :placeholder "Last Name"}]]
+         [:div.field
+          [:label.label "Email"]
+          [:input.input {:type "text" :placeholder "Email"}]]
+         [:div.field
+          [:label.label "Select Password"]
+          [:input.input {:type "password" :placeholder "Select Password"}]]
+         [:div.field
+          [:label.label "Repeat Password"]
+          [:input.input {:type "password" :placeholder "Repeat Password"}]]
+         [:div.field
+          [:label.label "Time Zone"]
+          [:input.input {:type "text" :placeholder "Time Zone"}]]
+         [:div.field
+          [:label.checkbox
+           [:input.mr-2 {:type "checkbox"}]
+           "I have read and agree with your"
+           [:a {:href "#"} "terms of service"]
+           [:a {:href "#"} "privacy policy"]]]
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-offset-1
+           [:button.button
+            [:a {:href "/#/"} "Back"]]]
+          [:div.column.is-offset-1
+           [:button.button
+            [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]]))
 
 (defn service-log-page []
-  [:section.hero
-   [:div.hero-body
-    [:div.container
-     [:div.columns.is-mobile {:style {:margin-bottom "50%"}}
-    
-  			 [:div.column
-       [:label.label [:a "Service Log"]]
-       [:h4 "Chat"] [:div "Requested"]
-       [:div "Scheduled"]]]
-      ]]])
+  (fn []
+    [:section.hero
+     [:div.hero-body
+      [:div.container
+       [:div.columns.is-mobile {:style {:margin-bottom "50%"}}
+
+        [:div.column
+         [:label.label [:a "Service Log"]]
+         [:h4 "Chat"] [:div "Requested"]
+         [:div "Scheduled"]]]]]])
+  )
+
+(defn requestor-chat [status provider]
+  (fn []
+    (case status
+      "requested" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Chat"]
+                    [:div.column (str "Provider: " provider)]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Deadline"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
+                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+      "declined" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Chat"]
+                   [:div.column (str "Provider: " provider)]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Cancelled"]
+                   [:div.column]]]
+      "accepted" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Chat"]
+                   [:div.column (str "Provider: " provider)]
+                   [:div.column.is-3 [:a {:href "/"} "Cancel"]]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]]
+      "failed" [:div.box.mt-1
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Chat"]
+                 [:div.column (str "Provider: " provider)]]
+                [:div.columns.is-centered  {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Requested"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Deadline"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Expired"]
+                 [:div.column]]]
+      "completed" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Chat"]
+                    [:div.column (str "Provider: " provider)]
+                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Completed"]
+                    [:div.column]]])))
+
+(defn provider-chat [status requestor]
+  (fn []
+    (case status
+      "requested" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Chat"]
+                    [:div.column (str "Requestor: " requestor)]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Deadline"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
+                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+      "declined" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Chat"]
+                   [:div.column (str "Requestor: " requestor)]]
+                  [:div.columns.is-centered
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Cancelled"]
+                   [:div.column]]]
+      "accepted" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Chat"]
+                   [:div.column (str "Requestor: " requestor)]
+                   [:div.column.is-3 [:a {:href "/"} "Respond"]]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]]
+      "failed" [:div.box.mt-1
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Chat"]
+                 [:div.column (str "Requestor: " requestor)]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Requested"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Deadline"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Expired"]
+                 [:div.column]]]
+      "completed" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Chat"]
+                    [:div.column (str "Requestor: " requestor)]
+                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Completed"]
+                    [:div.column]]])))
+
+(defn requestor-message [status provider]
+  (fn []
+    (case status
+      "requested" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Message"]
+                    [:div.column (str "Provider: " provider)]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Deadline"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
+                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+      "declined" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Message"]
+                   [:div.column (str "Provider: " provider)]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Cancelled"]
+                   [:div.column]]]
+      "accepted" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Message"]
+                   [:div.column (str "Provider: " provider)]
+                   [:div.column.is-3 [:a {:href "/"} "Cancel"]]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]]
+      "failed" [:div.box.mt-1
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Message"]
+                 [:div.column (str "Provider: " provider)]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Requested"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Deadline"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Expired"]
+                 [:div.column]]]
+      "completed" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Message"]
+                    [:div.column (str "Provider: " provider)]
+                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Completed"]
+                    [:div.column]]])))
+
+(defn provider-message [status requestor]
+  (fn []
+    (case status
+      "requested" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Message"]
+                    [:div.column (str "Requestor: " requestor)]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Deadline"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
+                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+      "declined" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Message"]
+                    [:div.column (str "Requestor: " requestor)]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Deadline"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Cancelled"]
+                    [:div.column]]]
+      "accepted" [:div.box.mt-1
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Message"]
+                   [:div.column (str "Requestor: " requestor)]
+                   [:div.column.is-3 [:a {:href "/"} "Respond"]]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Requested"]
+                   [:div.column]]
+                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                   [:div.column.is-3 "Deadline"]
+                   [:div.column]]]
+      "failed" [:div.box.mt-1
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Message"]
+                 [:div.column (str "Requestor: " requestor)]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Requested"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Deadline"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Expired"]
+                 [:div.column]]]
+      "completed" [:div.box.mt-1
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Message"]
+                    [:div.column (str "Requestor: " requestor)]
+                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Requested"]
+                    [:div.column]]
+                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                    [:div.column.is-3 "Completed"]
+                    [:div.column]]])))
+
+(defn earnings-log [status requestor]
+  (fn []
+    (case status
+      "earned" [:div.box.mt-1
+                [:div.columns.is-centered
+                 [:div.column.is-3 "Chat"]
+                 [:div.column (str "Requestor: " requestor)]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Completed"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Fee"]
+                 [:div.column "$15"]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Balance"]
+                 [:div.column "$12"]]]
+      "refund" [:div.box.mt-1
+              [:div.columns.is-centered
+               [:div.column.is-3 "Chat"]
+               [:div.column (str "Provider: " requestor)]]
+              [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+               [:div.column.is-3 "Expired"]
+               [:div.column]]
+              [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+               [:div.column.is-3 "Refund"]
+               [:div.column "$15"]]
+              [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+               [:div.column.is-3 "Balance"]
+               [:div.column "$12"]]]
+      "paid" [:div.box.mt-1
+                [:div.columns.is-centered
+                 [:div.column.is-3 "Chat"]
+                 [:div.column (str "Provider: " requestor)]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Completed"]
+                 [:div.column]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Billed"]
+                 [:div.column "$15"]]
+                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+                 [:div.column.is-3 "Balance"]
+                 [:div.column "$12"]]])))
+
+
+(defn profile []
+  (fn []
+      [:div.ml-2
+       [:div.columns.is-centered
+       [:div.column.is-8
+        [:div.title.is-6.has-text "Profile"]]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Linkedin Profile : "]
+       [:div.column [:button.button
+                     [:a {:href ""} "Upload"]]]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Last Updated : "]
+       [:div.column "Jan 20 2021"]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Photo : "]
+       [:div.column [:figure]]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Work Experience : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Internship : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Scholarships : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Publications : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Patents : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Memberships : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Courses : "]
+       [:div.column]]
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-centered.is-3 "Competitions : "]
+       [:div.column]]
+
+      [:div.columns.is-centered.is-mobile
+       [:div.column.is-3 "Recommendations : "]
+       [:div.column]]
+
+      [:div.columns.is-centered.is-mobile
+       [:div.column [:button.button
+                     [:a {:href ""} "Update"]]]]]))
+
+
+
+(defn account-detail [item]
+  (fn []
+    (case item
+      "myservice" [:div [:div.mb-2 "For maximum benefit, display your service link in your LinkedIn profile, your Facebook page,all your websites, and in your email signature"]
+                   [:div "Here is your link : URL"]]
+      "messages" [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Yes"]]
+      "chats" [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Yes"]
+               [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "No"]]
+      "instant-chats" [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Yes"]
+                       [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "No"]]
+      "payperuse" [:div
+                   [:div.columns
+                    [:div.column.is-2 "Standard"]
+                    [:div.column [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "XM[$02]"]
+                                  [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "XC[$10]"]]]]
+                   [:div.columns
+                    [:div.column.is-2 "PPU1"]
+                    [:div.column [:div
+                                  [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Standard"]
+                                  [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "PPUI"]]]]]
+      "subscriptions" [:div
+                       [:div.columns
+                        [:div.column.is-2 "SUB1"]
+                        [:div.column [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Fee[$10]"]
+                                      [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "Term[Month or Year]"]]]]
+                       [:div.columns
+                        [:div.column.is-2 "Included"]
+                        [:div.column [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "XM[$05]"]
+                                      [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "XC[$01]"]]]]]
+      "profile" [:div [(profile)]]
+      "notifications" [:div
+                       [:div.columns
+                        [:div.column.is-2 "Email"]
+                        [:div.column [:div [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Yes"]
+                                      [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "No"]]]]
+                       [:div.columns
+                        [:div.column.is-2 "SMS"]
+                        [:div.column [:div
+                                      [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 0%"}}] "Yes"]
+                                      [:label [:input {:type "radio" :name "answer" :style {:margin "0% 1% 0% 2%"}}] "No"]]]]]
+      "availability" [:div "Availability"]
+
+      "chg-password" [:div "Change Password"]
+      "provider-msgs" [:div 
+                       [:div.mb-1 "You are the Provider : Messages"]
+                        [(provider-message "requested" "raghu")]
+                        [(provider-message "failed" "raghu")]
+                        [(provider-message "completed" "raghu")]
+                        [(provider-message "declined" "raghu")]
+                        [(provider-message "accepted" "raghu")]]
+      "provider-chats" [:div [:div.mb-1 "You are the Provider : Chats"]
+                        [(provider-chat "requested" "raghu")]
+                        [(provider-chat "failed" "raghu")]
+                        [(provider-chat "completed" "raghu")]
+                        [(provider-chat "declined" "raghu")]
+                        [(provider-chat "accepted" "raghu")]]
+      "requestor-msgs" [:div [:div.mb-1 "You are the Requestor :Messages"]
+                        [(requestor-message "requested" "raghu")]
+                        [(requestor-message "failed" "raghu")]
+                        [(requestor-message "completed" "raghu")]
+                        [(requestor-message "declined" "raghu")]
+                        [(requestor-message "accepted" "raghu")]]
+      "requestor-chats" [:div [:div.mb-1 "You are the Requestor : Chats"]
+                         [(requestor-chat "requested" "raghu")]
+                         [(requestor-chat "failed" "raghu")]
+                         [(requestor-chat "completed" "raghu")]
+                         [(requestor-chat "declined" "raghu")]
+                         [(requestor-chat "accepted" "raghu")]]
+      "earnings" [:div [:div.mb-1 "Earnings"]
+                  [(earnings-log "earned" "raghu")]
+                  [(earnings-log "refund" "raghu")]
+                  [(earnings-log "paid" "raghu")]]
+      "payment" [:div "Payment Details"])))
 
 (defn services-page []
-  [:div.section
-   [:div.container.is-fluid.mt-5.pt-5
-     [:div.level.is-mobile
-      [:div.level-left 
-       [:div.level-item 
-       [:> ui/Menu {:vertical true}
-        [:> ui/MenuItem
-         [:> ui/MenuHeader "My Service Link"]
-         [:> ui/MenuMenu
-          [:> ui/MenuItem {:on-click #()} "Details"]]]
-        [:> ui/MenuItem
-         [:> ui/MenuHeader "Messages"]
-         [:> ui/MenuMenu
-          [:> ui/MenuItem {:on-click #()} "Select"]]]
-        [:> ui/MenuItem
-         [:> ui/MenuHeader "Chats"]
-         [:> ui/MenuMenu
-          [:> ui/MenuItem {:on-click #()} "Select"]]]
-        [:> ui/MenuItem
-         [:> ui/MenuHeader "Subscription Rates"]
-         [:> ui/MenuMenu
-          [:> ui/MenuItem {:on-click #()} "Select"]]]]]]
+  (fn []
+    [:div.section
+       [:div.container.is-fluid.mt-5.pt-5
+        [:div.columns.is-centered
+          [:div.column.is-8
+           [:div.title.is-6.has-text "Profile Setup"]]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Linkedin Profile : "]
+         [:div.column [:button.button
+                       [:a {:href ""} "Upload"]]]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Last Updated : "]
+         [:div.column "Jan 20 2021"]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Photo : "]
+         [:div.column [:figure]]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Work Experience : "]
+         [:div.column ]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Internship : "]
+         [:div.column]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Scholarships : "]
+         [:div.column]]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Publications : "]
+         [:div.column]]
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-3 "Patents : "]
+          [:div.column]]
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-3 "Memberships : "]
+          [:div.column]]
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-3 "Courses : "]
+          [:div.column]]
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-centered.is-3 "Competitions : "]
+          [:div.column]]
+        
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "Recommendations : "]
+         [:div.column]]
+        
+        [:div.columns.is-centered.is-mobile
+         [:div.column [:button.button
+                       [:a {:href ""} "Update"]]]]
+        
+        ]]))
 
+(defn account [] 
+  (let [state (r/atom {:selected "provider-msgs"})]
+    (fn []
       
-       [:div.level-item {:style {:background-color "white"}} "Details"]]]])
+      [:div.section
+       [:div.container.is-fluid.mt-5.pt-5
+        [:div.columns.is-mobile
+         [:div.column.is-2
+          [:> ui/Menu {:vertical true :fluid true :color "teal"}
+           [:> ui/MenuItem
+            [:> ui/MenuHeader "Provider Log"]
+            [:> ui/MenuMenu {:vertical true :fluid true :color "teal"}
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "provider-msgs")} "Messages"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "provider-chats")} "Chats"]]]
+           [:> ui/MenuItem
+            [:> ui/MenuHeader "Requestor Log"]
+            [:> ui/MenuMenu {:vertical true :fluid true :color "teal"}
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "requestor-msgs")} "Messages"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "requestor-chats")} "Chats"]]]
+           [:> ui/MenuItem
+            [:> ui/MenuHeader "Services"]
+            [:> ui/MenuMenu {:vertical true :fluid true :color "teal"}
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "myservice")} "My Service"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "messages")} "Messages"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "chats")} "Chats"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "instant-chats")} "Instant Chats"]
+             [:> ui/Dropdown {:item true :text "Plans"}
+              [:> ui/DropdownMenu
+               [:> ui/DropdownItem {:on-click #(swap! state assoc-in [:selected] "payperuse") :text "Pay Per Use"}]
+               [:> ui/DropdownItem {:on-click #(swap! state assoc-in [:selected] "subscriptions") :text "Subscriptions"}]]]]]
+           [:> ui/MenuItem
+            [:> ui/MenuHeader "Settings"]
+            [:> ui/MenuMenu {:vertical true :fluid true :color "teal"}
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "profile")} "Profile"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "notifications")} "Notifications"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "chg-password")} "Change Password"]
+             [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "availability")} "Availability"]]]
+           [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "payment")} "Payment Method"]
+           [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "earnings")} "Earning Log"]]]
 
 
+         [:div.column.mt-3 {:style {:min-height "600px"}} 
+          [(account-detail (:selected @state))]]]]])))
 
 (defn about-page []
-  [:div.columns.is-fluid.mt-5.pt-5
-   [:div.column.is-4]
-   [:div.column.is-4 (str "About Page")]
-   [:div.column.is-4
-     ]
-    ])
+  (fn []
+    [:div.columns.is-fluid.mt-5.pt-5
+     [:div.column.is-4]
+     [:div.column.is-4 (str "About Page")]
+     [:div.column.is-4]]
+    )
+  )
 
 (defn main-panel []
   (let [name (re-frame/subscribe [::subs/name])]

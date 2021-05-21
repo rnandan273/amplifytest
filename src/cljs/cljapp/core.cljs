@@ -25,7 +25,7 @@
   (if-let [page1 @(re-frame/subscribe [:common/page])]
     [:div 
      [:div {:style {:background-color "#ffffff" :position "fixed" :width "100%" :z-index 2 :top 0}} [views/navbar]]
-     [:div {:style {:z-index -2 :background-color "#A7D5F6" :min-height "1000px"}} [page1]]]))
+     [:div {:style {:z-index -2 :background-color "#A7D5F6" :min-height "1000px"}} [(page1)]]]))
 
 (def root-view
   (reagent/adapt-react-class
