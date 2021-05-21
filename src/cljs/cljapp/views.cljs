@@ -559,31 +559,31 @@
 
       "chg-password" [:div "Change Password"]
       "provider-msgs" [:div 
-                       [:div.mb-1 "You are the Provider : Messages"]
+                       [:div.mb-1 {:style {:font-weight "bold"}} "You are the Provider : Messages"]
                         [(provider-message "requested" "raghu")]
                         [(provider-message "failed" "raghu")]
                         [(provider-message "completed" "raghu")]
                         [(provider-message "declined" "raghu")]
                         [(provider-message "accepted" "raghu")]]
-      "provider-chats" [:div [:div.mb-1 "You are the Provider : Chats"]
+      "provider-chats" [:div [:div.mb-1 {:style {:font-weight "bold"}} "You are the Provider : Chats"]
                         [(provider-chat "requested" "raghu")]
                         [(provider-chat "failed" "raghu")]
                         [(provider-chat "completed" "raghu")]
                         [(provider-chat "declined" "raghu")]
                         [(provider-chat "accepted" "raghu")]]
-      "requestor-msgs" [:div [:div.mb-1 "You are the Requestor :Messages"]
+      "requestor-msgs" [:div [:div.mb-1 {:style {:font-weight "bold"}} "You are the Requestor : Messages"]
                         [(requestor-message "requested" "raghu")]
                         [(requestor-message "failed" "raghu")]
                         [(requestor-message "completed" "raghu")]
                         [(requestor-message "declined" "raghu")]
                         [(requestor-message "accepted" "raghu")]]
-      "requestor-chats" [:div [:div.mb-1 "You are the Requestor : Chats"]
+      "requestor-chats" [:div [:div.mb-1 {:style {:font-weight "bold"}} "You are the Requestor : Chats"]
                          [(requestor-chat "requested" "raghu")]
                          [(requestor-chat "failed" "raghu")]
                          [(requestor-chat "completed" "raghu")]
                          [(requestor-chat "declined" "raghu")]
                          [(requestor-chat "accepted" "raghu")]]
-      "earnings" [:div [:div.mb-1 "Earnings"]
+      "earnings" [:div [:div.mb-1 {:style {:font-weight "bold"}} "Earnings"]
                   [(earnings-log "earned" "raghu")]
                   [(earnings-log "refund" "raghu")]
                   [(earnings-log "paid" "raghu")]]
@@ -682,7 +682,7 @@
            [:> ui/MenuItem {:on-click #(swap! state assoc-in [:selected] "earnings")} "Earning Log"]]]
 
 
-         [:div.column.mt-3 {:style {:min-height "600px"}} 
+         [:div.column.mt-3 {:style {:background-color "#ffffff" :min-height "600px"}} 
           [(account-detail (:selected @state))]]]]])))
 
 (defn about-page []
