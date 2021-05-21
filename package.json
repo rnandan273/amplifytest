@@ -6,7 +6,9 @@
 		"highlight.js": "9.18.1",
 		"react": "16.14.0",
 		"react-dom": "16.14.0",
-		"react-highlight.js": "1.0.7"
+		"create-react-class": "^15.6.3",
+		"react-highlight.js": "1.0.7",
+		"semantic-ui-react": "0.87.3"
 	},
 	"devDependencies": {
 		"shadow-cljs": "2.11.21"

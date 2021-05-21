@@ -8,13 +8,14 @@
    [cljapp.config :as config]
    [reitit.core :as reitit]
    [reitit.frontend.easy :as rfe]
-   ["aws-amplify" :default Amplify :as amp]))
+   ["aws-amplify" :default Amplify :as amp]
+   ["aws-amplify-react" :refer (withAuthenticator)]))
 
 (defn dev-setup []
   (when config/debug?
     (println "dev mode")))
 
-(def root-view
+(def root-view1
   (reagent/adapt-react-class
   ; (withAuthenticator
    (reagent/reactify-component views/main-panel) ;true)
@@ -22,9 +23,15 @@
 
 (defn page []
   (if-let [page1 @(re-frame/subscribe [:common/page])]
-    [:div
-     [views/navbar]
-     [page1]]))
+    [:div 
+     [:div {:style {:background-color "#ffffff" :position "fixed" :width "100%" :z-index 2 :top 0}} [views/navbar]]
+     [:div {:style {:z-index -2 :background-color "#A7D5F6" :min-height "1000px"}} [page1]]]))
+
+(def root-view
+  (reagent/adapt-react-class
+   ;(withAuthenticator
+   (reagent/reactify-component page) ;true)
+   ))
 
 
 (defn navigate! [match _]
@@ -39,6 +46,8 @@
                :view #'views/login-page}]
     ["/signup" {:name :signup
                 :view #'views/signup-page}]
+    ["/user-account" {:name :account
+                                  :view #'views/account}]
     ["/user-account-service-log" {:name :service-log
                                   :view #'views/service-log-page}]
     ["/user-account-services" {:name :services
@@ -64,7 +73,7 @@
                                 :oauth {}}))
 
   (start-router!)
-  (rdom/render [page] (.getElementById js/document "app")))
+  (rdom/render [root-view] (.getElementById js/document "app")))
 
 (defn init []
 
