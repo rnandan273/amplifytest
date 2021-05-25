@@ -157,361 +157,283 @@
         [:div.column
          [:label.label [:a "Service Log"]]
          [:h4 "Chat"] [:div "Requested"]
-         [:div "Scheduled"]]]]]])
-  )
+         [:div "Scheduled"]]]]]]))
+
+(defn card-grid [items]
+  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
+   (for [item items]
+      ^{:key (str "at11 -" (rand 10000000))}
+     (case (:margin item)
+       0 [:div.column (:label item)]
+       [(keyword (str "div.column." "is-" (:margin item))) (:label item)]))])
 
 (defn requestor-chat [status provider]
   (fn []
     (case status
       "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Chat"]
-                    [:div.column (str "Provider: " provider)]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Deadline"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
-                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+                   (for [item [[{:margin 3 :label "Chat"}
+                                {:margin 0 :label (str "Provider: " provider)}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                               [{:margin 3 :label [:a {:href "/"} "Accept"]}
+                                {:margin 3 :label [:a {:href "/"} "Decline"]}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Chat"]
-                   [:div.column (str "Provider: " provider)]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Cancelled"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Chat"} 
+                               {:margin 0 :label (str "Provider: " provider)}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Cancelled"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
+      
       "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Chat"]
-                   [:div.column (str "Provider: " provider)]
-                   [:div.column.is-3 [:a {:href "/"} "Cancel"]]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Chat"}
+                               {:margin 0 :label (str "Provider: " provider)}
+                               {:margin 3 :label [:a {:href "/"} "Cancel"]}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Chat"]
-                 [:div.column (str "Provider: " provider)]]
-                [:div.columns.is-centered  {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Requested"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Deadline"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Expired"]
-                 [:div.column]]]
+                
+                (for [item [[{:margin 3 :label "Chat"}
+                             {:margin 0 :label (str "Provider: " provider)}]
+                            [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Expired"} {:margin 0 :label ""}]]]
+                  ^{:key (str "at11 -" (rand 10000000))}
+                  [card-grid item])]
+      
       "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Chat"]
-                    [:div.column (str "Provider: " provider)]
-                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Completed"]
-                    [:div.column]]])))
+                   (for [item [[{:margin 3 :label "Chat"}
+                                {:margin 0 :label (str "Provider: " provider)}
+                                {:margin 3 :label [:a {:href "/"} "Transcript"]}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Completed"} {:margin 0 :label ""}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])])))
 
 (defn provider-chat [status requestor]
   (fn []
     (case status
       "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Chat"]
-                    [:div.column (str "Requestor: " requestor)]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Deadline"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
-                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+                   (for [item [[{:margin 3 :label "Chat"}
+                                {:margin 0 :label (str "Requestor: " requestor)}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                               [{:margin 3 :label [:a {:href "/"} "Accept"]}
+                                {:margin 3 :label [:a {:href "/"} "Decline"]}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Chat"]
-                   [:div.column (str "Requestor: " requestor)]]
-                  [:div.columns.is-centered
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Cancelled"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Chat"} 
+                               {:margin 0 :label (str "Requestor: " requestor)}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Cancelled"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
+      
       "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Chat"]
-                   [:div.column (str "Requestor: " requestor)]
-                   [:div.column.is-3 [:a {:href "/"} "Respond"]]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Chat"}
+                               {:margin 0 :label (str "Requestor: " requestor)}
+                               {:margin 3 :label [:a {:href "/"} "Cancel"]}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Chat"]
-                 [:div.column (str "Requestor: " requestor)]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Requested"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Deadline"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Expired"]
-                 [:div.column]]]
+                
+                (for [item [[{:margin 3 :label "Chat"}
+                             {:margin 0 :label (str "Requestor: " requestor)}]
+                            [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Expired"} {:margin 0 :label ""}]]]
+                  ^{:key (str "at11 -" (rand 10000000))}
+                  [card-grid item])]
+      
       "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Chat"]
-                    [:div.column (str "Requestor: " requestor)]
-                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Completed"]
-                    [:div.column]]])))
+                   (for [item [[{:margin 3 :label "Chat"}
+                                {:margin 0 :label (str "Requestor: " requestor)}
+                                {:margin 3 :label [:a {:href "/"} "Transcript"]}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Completed"} {:margin 0 :label ""}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])])))
 
 (defn requestor-message [status provider]
   (fn []
     (case status
       "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Message"]
-                    [:div.column (str "Provider: " provider)]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Deadline"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
-                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+                   (for [item [[{:margin 3 :label "Message"}
+                                {:margin 0 :label (str "Provider: " provider)}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                               [{:margin 3 :label [:a {:href "/"} "Accept"]}
+                                {:margin 3 :label [:a {:href "/"} "Decline"]}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Message"]
-                   [:div.column (str "Provider: " provider)]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Cancelled"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Message"}
+                               {:margin 0 :label (str "Provider: " provider)}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Cancelled"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                    [card-grid item])]
+
       "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Message"]
-                   [:div.column (str "Provider: " provider)]
-                   [:div.column.is-3 [:a {:href "/"} "Cancel"]]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Message"}
+                               {:margin 0 :label (str "Provider: " provider)}
+                               {:margin 3 :label [:a {:href "/"} "Cancel"]}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                    [card-grid item])]
       "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Message"]
-                 [:div.column (str "Provider: " provider)]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Requested"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Deadline"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Expired"]
-                 [:div.column]]]
+
+                (for [item [[{:margin 3 :label "Message"}
+                             {:margin 0 :label (str "Provider: " provider)}]
+                            [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Expired"} {:margin 0 :label ""}]]]
+                  ^{:key (str "at11 -" (rand 10000000))}
+                  [card-grid item])]
+
       "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Message"]
-                    [:div.column (str "Provider: " provider)]
-                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Completed"]
-                    [:div.column]]])))
+                   (for [item [[{:margin 3 :label "Message"}
+                                {:margin 0 :label (str "Provider: " provider)}
+                                {:margin 3 :label [:a {:href "/"} "Transcript"]}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Completed"} {:margin 0 :label ""}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])])))
 
 (defn provider-message [status requestor]
   (fn []
     (case status
       "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Message"]
-                    [:div.column (str "Requestor: " requestor)]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Deadline"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 [:a {:href "/"} "Accept"]]
-                    [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
+                   (for [item [[{:margin 3 :label "Message"}
+                                {:margin 0 :label (str "Requestor: " requestor)}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                               [{:margin 3 :label [:a {:href "/"} "Accept"]}
+                                {:margin 3 :label [:a {:href "/"} "Decline"]}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Message"]
-                    [:div.column (str "Requestor: " requestor)]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Deadline"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Cancelled"]
-                    [:div.column]]]
+                  (for [item [[{:margin 3 :label "Message"} 
+                               {:margin 0 :label (str "Requestor: " requestor)}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Cancelled"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
+      
       "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Message"]
-                   [:div.column (str "Requestor: " requestor)]
-                   [:div.column.is-3 [:a {:href "/"} "Respond"]]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Requested"]
-                   [:div.column]]
-                  [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                   [:div.column.is-3 "Deadline"]
-                   [:div.column]]]
+                  (for [item [[{:margin 3 :label "Message"}
+                               {:margin 0 :label (str "Requestor: " requestor)}
+                               {:margin 3 :label [:a {:href "/"} "Cancel"]}]
+                              [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                              [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]]]
+                    ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])]
       "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Message"]
-                 [:div.column (str "Requestor: " requestor)]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Requested"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Deadline"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Expired"]
-                 [:div.column]]]
+                (for [item [[{:margin 3 :label "Message"}
+                             {:margin 0 :label (str "Requestor: " requestor)}]
+                            [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Deadline"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Expired"} {:margin 0 :label ""}]]]
+                  ^{:key (str "at11 -" (rand 10000000))}
+                  [card-grid item])]
+      
       "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Message"]
-                    [:div.column (str "Requestor: " requestor)]
-                    [:div.column.is-3 [:a {:href "/"} "Transcript"]]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Requested"]
-                    [:div.column]]
-                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                    [:div.column.is-3 "Completed"]
-                    [:div.column]]])))
+                   (for [item [[{:margin 3 :label "Message"}
+                                {:margin 0 :label (str "Requestor: " requestor)}
+                                {:margin 3 :label [:a {:href "/"} "Transcript"]}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Requested"} {:margin 0 :label ""}]
+                               [{:margin 3 :label "Completed"} {:margin 0 :label ""}]]]
+                     ^{:key (str "at11 -" (rand 10000000))}
+                     [card-grid item])])))
 
 (defn earnings-log [status requestor]
   (fn []
     (case status
       "earned" [:div.box.mt-1 {:style {:background-color "#F6EDC2"}}
-                [:div.columns.is-centered
-                 [:div.column.is-3 "Chat"]
-                 [:div.column (str "Requestor: " requestor)]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Completed"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Fee"]
-                 [:div.column "$15"]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Balance"]
-                 [:div.column "$12"]]]
+                (for [item [[{:margin 3 :label "Chat"}
+                             {:margin 0 :label (str "Requestor: " requestor)}]
+                            [{:margin 3 :label "Completed"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Fee"} {:margin 0 :label "$15"}]
+                            [{:margin 3 :label "Balance"} {:margin 0 :label "$12"}]]]
+                  ^{:key (str "at11 -" (rand 10000000))}
+                  [card-grid item])]
       "refund" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-              [:div.columns.is-centered
-               [:div.column.is-3 "Chat"]
-               [:div.column (str "Provider: " requestor)]]
-              [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-               [:div.column.is-3 "Expired"]
-               [:div.column]]
-              [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-               [:div.column.is-3 "Refund"]
-               [:div.column "$15"]]
-              [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-               [:div.column.is-3 "Balance"]
-               [:div.column "$12"]]]
+                (for [item [[{:margin 3 :label "Chat"}
+                             {:margin 0 :label (str "Provider: " requestor)}]
+                            [{:margin 3 :label "Completed"} {:margin 0 :label ""}]
+                            [{:margin 3 :label "Refund"} {:margin 0 :label "$15"}]
+                            [{:margin 3 :label "Balance"} {:margin 0 :label "$12"}]]]
+                  ^{:key (str "at11 -" (rand 10000000))}
+                  [card-grid item])]
       "paid" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
-                [:div.columns.is-centered
-                 [:div.column.is-3 "Chat"]
-                 [:div.column (str "Provider: " requestor)]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Completed"]
-                 [:div.column]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Billed"]
-                 [:div.column "$15"]]
-                [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
-                 [:div.column.is-3 "Balance"]
-                 [:div.column "$12"]]])))
+              (for [item [[{:margin 3 :label "Chat"}
+                           {:margin 0 :label (str "Provider: " requestor)}]
+                          [{:margin 3 :label "Completed"} {:margin 0 :label ""}]
+                          [{:margin 3 :label "Billed"} {:margin 0 :label "$15"}]
+                          [{:margin 3 :label "Balance"} {:margin 0 :label "$12"}]]]
+                ^{:key (str "at11 -" (rand 10000000))}
+                [card-grid item])])))
 
+(defn profile-item [items]
+  [:div.columns.is-centered.is-mobile
+   (for [item items]
+     ^{:key (str "at11 -" (rand 10000000))}
+     (case (:margin item)
+       0 [:div.column (:label item)]
+       [(keyword (str "div.column." "is-" (:margin item) ".has-text")) (:label item)]))])
 
 (defn profile []
   (fn []
       [:div.ml-2
        [:div.columns.is-centered
-       [:div.column.is-8
-        [:div.title.is-6.has-text "Profile"]]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Linkedin Profile : "]
-       [:div.column [:button.button
-                     [:a {:href ""} "Upload"]]]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Last Updated : "]
-       [:div.column "Jan 20 2021"]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Photo : "]
-       [:div.column [:figure]]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Work Experience : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Internship : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Scholarships : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Publications : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Patents : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Memberships : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Courses : "]
-       [:div.column]]
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-centered.is-3 "Competitions : "]
-       [:div.column]]
-
-      [:div.columns.is-centered.is-mobile
-       [:div.column.is-3 "Recommendations : "]
-       [:div.column]]
-
-      [:div.columns.is-centered.is-mobile
-       [:div.column [:button.button
-                     [:a {:href ""} "Update"]]]]]))
+        [:div.column.is-8
+         [:div.title.is-6.has-text "Profile"]]]
+       (for [item [[{:margin 3 :label "LinkedIn Profile : "}
+                    {:margin 0 :label [:button.button
+                                       [:a {:href ""} "Upload"]]}]
+                   [{:margin 3 :label "Last Updated : "}
+                    {:margin 0 :label "Jan 20 2021"}]
+                   [{:margin 3 :label "Photo : "}
+                    {:margin 0 :label [:figure]}]
+                   [{:margin 3 :label "Work Experience : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Internship : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Scholarship : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Publications : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Patents : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Membership : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Courses : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Competitions : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Recommendations : "}
+                    {:margin 0 :label ""}]
+                   [{:margin 3 :label "Update : "}
+                    {:margin 0 :label [:button.button
+                                       [:a {:href ""} "Update"]]}]]]
+         ^{:key (str "at11 -" (rand 10000000))}
+         [profile-item item])]))
 
 
 
@@ -602,63 +524,36 @@
           [:div.column.is-8
            [:div.title.is-6.has-text 
             "Profile Setup"]]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Linkedin Profile : "]
-         [:div.column [:button.button
-                       [:a {:href ""} 
-                        "Upload"]]]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Last Updated : "]
-         [:div.column 
-          "Jan 20 2021"]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Photo : "]
-         [:div.column [:figure]]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Work Experience : "]
-         [:div.column ]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Internship : "]
-         [:div.column]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Scholarships : "]
-         [:div.column]]
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Publications : "]
-         [:div.column]]
-         [:div.columns.is-centered.is-mobile
-          [:div.column.is-3 
-           "Patents : "]
-          [:div.column]]
-         [:div.columns.is-centered.is-mobile
-          [:div.column.is-3 
-           "Memberships : "]
-          [:div.column]]
-         [:div.columns.is-centered.is-mobile
-          [:div.column.is-3 
-           "Courses : "]
-          [:div.column]]
-         [:div.columns.is-centered.is-mobile
-          [:div.column.is-centered.is-3 
-           "Competitions : "]
-          [:div.column]]
-        
-        [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 
-          "Recommendations : "]
-         [:div.column]]
-        
-        [:div.columns.is-centered.is-mobile
-         [:div.column [:button.button
-                       [:a {:href ""}
-                        "Update"]]]]
+        (for [item [[{:margin 3 :label "LinkedIn Profile : "}
+                     {:margin 0 :label [:button.button
+                                        [:a {:href ""} "Upload"]]}]
+                    [{:margin 3 :label "Last Updated : "}
+                     {:margin 0 :label "Jan 20 2021"}]
+                    [{:margin 3 :label "Photo : "}
+                     {:margin 0 :label [:figure]}]
+                    [{:margin 3 :label "Work Experience : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Internship : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Scholarship : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Publications : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Patents : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Membership : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Courses : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Competitions : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Recommendations : "}
+                     {:margin 0 :label ""}]
+                    [{:margin 3 :label "Update : "}
+                     {:margin 0 :label [:button.button
+                                        [:a {:href ""} "Update"]]}]]]
+          ^{:key (str "at11 -" (rand 10000000))}
+          [profile-item item])
         
         ]]))
 
