@@ -163,7 +163,7 @@
 (defn requestor-chat [status provider]
   (fn []
     (case status
-      "requested" [:div.box.mt-1
+      "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Chat"]
                     [:div.column (str "Provider: " provider)]]
@@ -176,7 +176,7 @@
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 [:a {:href "/"} "Accept"]]
                     [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
-      "declined" [:div.box.mt-1
+      "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Chat"]
                    [:div.column (str "Provider: " provider)]]
@@ -189,7 +189,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Cancelled"]
                    [:div.column]]]
-      "accepted" [:div.box.mt-1
+      "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Chat"]
                    [:div.column (str "Provider: " provider)]
@@ -200,7 +200,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Deadline"]
                    [:div.column]]]
-      "failed" [:div.box.mt-1
+      "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Chat"]
                  [:div.column (str "Provider: " provider)]]
@@ -213,7 +213,7 @@
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Expired"]
                  [:div.column]]]
-      "completed" [:div.box.mt-1
+      "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Chat"]
                     [:div.column (str "Provider: " provider)]
@@ -228,7 +228,7 @@
 (defn provider-chat [status requestor]
   (fn []
     (case status
-      "requested" [:div.box.mt-1
+      "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Chat"]
                     [:div.column (str "Requestor: " requestor)]]
@@ -241,7 +241,7 @@
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 [:a {:href "/"} "Accept"]]
                     [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
-      "declined" [:div.box.mt-1
+      "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Chat"]
                    [:div.column (str "Requestor: " requestor)]]
@@ -254,7 +254,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Cancelled"]
                    [:div.column]]]
-      "accepted" [:div.box.mt-1
+      "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Chat"]
                    [:div.column (str "Requestor: " requestor)]
@@ -265,7 +265,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Deadline"]
                    [:div.column]]]
-      "failed" [:div.box.mt-1
+      "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Chat"]
                  [:div.column (str "Requestor: " requestor)]]
@@ -278,7 +278,7 @@
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Expired"]
                  [:div.column]]]
-      "completed" [:div.box.mt-1
+      "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Chat"]
                     [:div.column (str "Requestor: " requestor)]
@@ -293,7 +293,7 @@
 (defn requestor-message [status provider]
   (fn []
     (case status
-      "requested" [:div.box.mt-1
+      "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Message"]
                     [:div.column (str "Provider: " provider)]]
@@ -306,7 +306,7 @@
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 [:a {:href "/"} "Accept"]]
                     [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
-      "declined" [:div.box.mt-1
+      "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Message"]
                    [:div.column (str "Provider: " provider)]]
@@ -319,7 +319,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Cancelled"]
                    [:div.column]]]
-      "accepted" [:div.box.mt-1
+      "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Message"]
                    [:div.column (str "Provider: " provider)]
@@ -330,7 +330,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Deadline"]
                    [:div.column]]]
-      "failed" [:div.box.mt-1
+      "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Message"]
                  [:div.column (str "Provider: " provider)]]
@@ -343,7 +343,7 @@
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Expired"]
                  [:div.column]]]
-      "completed" [:div.box.mt-1
+      "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Message"]
                     [:div.column (str "Provider: " provider)]
@@ -358,7 +358,7 @@
 (defn provider-message [status requestor]
   (fn []
     (case status
-      "requested" [:div.box.mt-1
+      "requested" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Message"]
                     [:div.column (str "Requestor: " requestor)]]
@@ -371,7 +371,7 @@
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 [:a {:href "/"} "Accept"]]
                     [:div.column.is-3 [:a {:href "/"} "Decline"]]]]
-      "declined" [:div.box.mt-1
+      "declined" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Message"]
                     [:div.column (str "Requestor: " requestor)]]
@@ -384,7 +384,7 @@
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Cancelled"]
                     [:div.column]]]
-      "accepted" [:div.box.mt-1
+      "accepted" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Message"]
                    [:div.column (str "Requestor: " requestor)]
@@ -395,7 +395,7 @@
                   [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                    [:div.column.is-3 "Deadline"]
                    [:div.column]]]
-      "failed" [:div.box.mt-1
+      "failed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Message"]
                  [:div.column (str "Requestor: " requestor)]]
@@ -408,7 +408,7 @@
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Expired"]
                  [:div.column]]]
-      "completed" [:div.box.mt-1
+      "completed" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                    [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                     [:div.column.is-3 "Message"]
                     [:div.column (str "Requestor: " requestor)]
@@ -423,7 +423,7 @@
 (defn earnings-log [status requestor]
   (fn []
     (case status
-      "earned" [:div.box.mt-1
+      "earned" [:div.box.mt-1 {:style {:background-color "#F6EDC2"}}
                 [:div.columns.is-centered
                  [:div.column.is-3 "Chat"]
                  [:div.column (str "Requestor: " requestor)]]
@@ -436,7 +436,7 @@
                 [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                  [:div.column.is-3 "Balance"]
                  [:div.column "$12"]]]
-      "refund" [:div.box.mt-1
+      "refund" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
               [:div.columns.is-centered
                [:div.column.is-3 "Chat"]
                [:div.column (str "Provider: " requestor)]]
@@ -449,7 +449,7 @@
               [:div.columns.is-centered {:style {:margin "0% 0% -1% 0%"}}
                [:div.column.is-3 "Balance"]
                [:div.column "$12"]]]
-      "paid" [:div.box.mt-1
+      "paid" [:div.box.mt-1  {:style {:background-color "#F6EDC2"}}
                 [:div.columns.is-centered
                  [:div.column.is-3 "Chat"]
                  [:div.column (str "Provider: " requestor)]]
@@ -559,31 +559,36 @@
 
       "chg-password" [:div "Change Password"]
       "provider-msgs" [:div 
-                       [:div.mb-1 {:style {:font-weight "bold"}} "You are the Provider : Messages"]
+                       [:div.mb-1 {:style {:font-weight "bold"}}
+                        "You are the Provider : Messages"]
                         [(provider-message "requested" "raghu")]
                         [(provider-message "failed" "raghu")]
                         [(provider-message "completed" "raghu")]
                         [(provider-message "declined" "raghu")]
                         [(provider-message "accepted" "raghu")]]
-      "provider-chats" [:div [:div.mb-1 {:style {:font-weight "bold"}} "You are the Provider : Chats"]
+      "provider-chats" [:div [:div.mb-1 {:style {:font-weight "bold"}}
+                              "You are the Provider : Chats"]
                         [(provider-chat "requested" "raghu")]
                         [(provider-chat "failed" "raghu")]
                         [(provider-chat "completed" "raghu")]
                         [(provider-chat "declined" "raghu")]
                         [(provider-chat "accepted" "raghu")]]
-      "requestor-msgs" [:div [:div.mb-1 {:style {:font-weight "bold"}} "You are the Requestor : Messages"]
+      "requestor-msgs" [:div [:div.mb-1 {:style {:font-weight "bold"}} 
+                              "You are the Requestor : Messages"]
                         [(requestor-message "requested" "raghu")]
                         [(requestor-message "failed" "raghu")]
                         [(requestor-message "completed" "raghu")]
                         [(requestor-message "declined" "raghu")]
                         [(requestor-message "accepted" "raghu")]]
-      "requestor-chats" [:div [:div.mb-1 {:style {:font-weight "bold"}} "You are the Requestor : Chats"]
+      "requestor-chats" [:div [:div.mb-1 {:style {:font-weight "bold"}} 
+                               "You are the Requestor : Chats"]
                          [(requestor-chat "requested" "raghu")]
                          [(requestor-chat "failed" "raghu")]
                          [(requestor-chat "completed" "raghu")]
                          [(requestor-chat "declined" "raghu")]
                          [(requestor-chat "accepted" "raghu")]]
-      "earnings" [:div [:div.mb-1 {:style {:font-weight "bold"}} "Earnings"]
+      "earnings" [:div [:div.mb-1 {:style {:font-weight "bold"}} 
+                        "Earnings"]
                   [(earnings-log "earned" "raghu")]
                   [(earnings-log "refund" "raghu")]
                   [(earnings-log "paid" "raghu")]]
@@ -595,49 +600,65 @@
        [:div.container.is-fluid.mt-5.pt-5
         [:div.columns.is-centered
           [:div.column.is-8
-           [:div.title.is-6.has-text "Profile Setup"]]]
+           [:div.title.is-6.has-text 
+            "Profile Setup"]]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Linkedin Profile : "]
+         [:div.column.is-3 
+          "Linkedin Profile : "]
          [:div.column [:button.button
-                       [:a {:href ""} "Upload"]]]]
+                       [:a {:href ""} 
+                        "Upload"]]]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Last Updated : "]
-         [:div.column "Jan 20 2021"]]
+         [:div.column.is-3 
+          "Last Updated : "]
+         [:div.column 
+          "Jan 20 2021"]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Photo : "]
+         [:div.column.is-3 
+          "Photo : "]
          [:div.column [:figure]]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Work Experience : "]
+         [:div.column.is-3 
+          "Work Experience : "]
          [:div.column ]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Internship : "]
+         [:div.column.is-3 
+          "Internship : "]
          [:div.column]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Scholarships : "]
+         [:div.column.is-3 
+          "Scholarships : "]
          [:div.column]]
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Publications : "]
+         [:div.column.is-3 
+          "Publications : "]
          [:div.column]]
          [:div.columns.is-centered.is-mobile
-          [:div.column.is-3 "Patents : "]
+          [:div.column.is-3 
+           "Patents : "]
           [:div.column]]
          [:div.columns.is-centered.is-mobile
-          [:div.column.is-3 "Memberships : "]
+          [:div.column.is-3 
+           "Memberships : "]
           [:div.column]]
          [:div.columns.is-centered.is-mobile
-          [:div.column.is-3 "Courses : "]
+          [:div.column.is-3 
+           "Courses : "]
           [:div.column]]
          [:div.columns.is-centered.is-mobile
-          [:div.column.is-centered.is-3 "Competitions : "]
+          [:div.column.is-centered.is-3 
+           "Competitions : "]
           [:div.column]]
         
         [:div.columns.is-centered.is-mobile
-         [:div.column.is-3 "Recommendations : "]
+         [:div.column.is-3 
+          "Recommendations : "]
          [:div.column]]
         
         [:div.columns.is-centered.is-mobile
          [:div.column [:button.button
-                       [:a {:href ""} "Update"]]]]
+                       [:a {:href ""}
+                        "Update"]]]]
         
         ]]))
 
