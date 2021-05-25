@@ -40,8 +40,7 @@
 (defn home-page []
   (fn []
     [:div.section
-     [:div.container.is-fluid.mt-5.pt-5
-
+     [:div.container.is-fluid.mt-5.pt-5 
       [:div.box [:div.columns.is-centered.is-vcentered
                  [:div.column
                   [:div.title.is-8.has-text-info {:style {:text-align "center"}}
@@ -108,11 +107,14 @@
   (fn []
     [:div.section
      [:div.container.is-fluid.mt-5.pt-5
+      
       [:div.columns.is-centered
        [:div.column.is-5
         [:label.box.label.is-medium.has-text-centered "Sign Up"]]]
+      [:div.columns.is-centered.is-vcentered
+       [:div.column.is-9
       [:div.columns.is-centered
-       [:div.column.is-5
+       [:div.column.is-8
         [:form.box
          [:div.field
           [:label.label "First Name"]
@@ -145,7 +147,12 @@
             [:a {:href "/#/"} "Back"]]]
           [:div.column.is-offset-1
            [:button.button
-            [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]]))
+            [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]
+         [:div.column
+         [:div.columns.is-centered.is-mobile
+          [:div.column.is-6
+           [:button.button
+            [:a {:href "/#/"} "SignUp with LinkedIn"]]]]]]]]))
 
 (defn service-log-page []
   (fn []
