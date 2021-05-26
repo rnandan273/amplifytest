@@ -111,10 +111,8 @@
       [:div.columns.is-centered
        [:div.column.is-5
         [:label.box.label.is-medium.has-text-centered "Sign Up"]]]
-      [:div.columns.is-centered.is-vcentered
-       [:div.column.is-9
       [:div.columns.is-centered
-       [:div.column.is-8
+       [:div.column.is-5
         [:form.box
          [:div.field
           [:label.label "First Name"]
@@ -133,9 +131,6 @@
           [:label.label "Repeat Password"]
           [:input.input {:type "password" :placeholder "Repeat Password"}]]
          [:div.field
-          [:label.label "Time Zone"]
-          [:input.input {:type "text" :placeholder "Time Zone"}]]
-         [:div.field
           [:label.checkbox
            [:input.mr-2 {:type "checkbox"}]
            "I have read and agree with your"
@@ -147,12 +142,7 @@
             [:a {:href "/#/"} "Back"]]]
           [:div.column.is-offset-1
            [:button.button
-            [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]
-         [:div.column
-         [:div.columns.is-centered.is-mobile
-          [:div.column.is-6
-           [:button.button
-            [:a {:href "/#/"} "SignUp with LinkedIn"]]]]]]]]))
+            [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]]))
 
 (defn service-log-page []
   (fn []
@@ -413,7 +403,7 @@
          [:div.title.is-6.has-text "Profile"]]]
        (for [item [[{:margin 3 :label "LinkedIn Profile : "}
                     {:margin 0 :label [:button.button
-                                       [:a {:href ""} "Upload"]]}]
+                                       [:a {:href ""} "Import"]]}]
                    [{:margin 3 :label "Last Updated : "}
                     {:margin 0 :label "Jan 20 2021"}]
                    [{:margin 3 :label "Photo : "}
@@ -533,7 +523,7 @@
             "Profile Setup"]]]
         (for [item [[{:margin 3 :label "LinkedIn Profile : "}
                      {:margin 0 :label [:button.button
-                                        [:a {:href ""} "Upload"]]}]
+                                        [:a {:href ""} "Import"]]}]
                     [{:margin 3 :label "Last Updated : "}
                      {:margin 0 :label "Jan 20 2021"}]
                     [{:margin 3 :label "Photo : "}
