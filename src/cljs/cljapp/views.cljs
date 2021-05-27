@@ -4,6 +4,7 @@
    [cljapp.events :as events]
    [reagent.core :as r]
    ["semantic-ui-react" :as ui]
+   ["linkedin-login-for-react" :as lnk :default LinkedIn]
    [cljapp.subs :as subs]))
 
 (defonce state (r/atom 0))
@@ -398,13 +399,15 @@
 (defn profile []
   (fn []
       [:div.ml-2
+   
        [:div.columns.is-centered
         [:div.column.is-8
          [:div.title.is-6.has-text "Profile"]]]
-       (for [item [[{:margin 3 :label "LinkedIn Profile : "}
-                    {:margin 0 :label [:button.button
-                                       [:a {:href ""} "Import"]]}]
-                   [{:margin 3 :label "Last Updated : "}
+       [:div.columns.is-centered.is-mobile 
+        [:div.column.is-3 "LinkedIn Profile : "]
+        [:div.column [:> LinkedIn {;:scope {["r_liteprofile" "r_emailaddress"]}
+                      :text "Update from LinkedIn"}] ]]
+       (for [item [[{:margin 3 :label "Last Updated : "}
                     {:margin 0 :label "Jan 20 2021"}]
                    [{:margin 3 :label "Photo : "}
                     {:margin 0 :label [:figure]}]
@@ -521,9 +524,11 @@
           [:div.column.is-8
            [:div.title.is-6.has-text 
             "Profile Setup"]]]
-        (for [item [[{:margin 3 :label "LinkedIn Profile : "}
-                     {:margin 0 :label [:button.button
-                                        [:a {:href ""} "Import"]]}]
+        [:div.columns.is-centered.is-mobile
+         [:div.column.is-3 "LinkedIn Profile : "]
+         [:div.column [:> LinkedIn {;:scope {["r_liteprofile" "r_emailaddress"]}
+                                    :text "Import from LinkedIn"}]]]
+        (for [item [
                     [{:margin 3 :label "Last Updated : "}
                      {:margin 0 :label "Jan 20 2021"}]
                     [{:margin 3 :label "Photo : "}
