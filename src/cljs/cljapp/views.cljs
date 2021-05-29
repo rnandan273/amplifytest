@@ -22,10 +22,10 @@
 
  
 (defn navbar []
-[:div.columns.is-centered.is-vcentered.is-mobile.p-4
+[:div.columns.is-centered.is-vcentered.is-mobile
    [:div.column [:a {:href "/#/" :style {:font-size 18 :font-weight "bold"}} "GIGION"]]
    [:div.column.is-6 [:a {:href "/#/" :style {:font-size 18 :font-weight "bold"}} "HOME PAGE"]]
-   [:div.column.is-1 [:a {:href "/#/login"} "Sign In"]]])
+   [:div.column.is-1 [:a {:href "/#/user-account"} "My Account"]]])
 
 (defn item [title link description]
   [:div.box.p-5
@@ -125,12 +125,12 @@
          [:div.field
           [:label.label "Email"]
           [:input.input {:type "text" :placeholder "Email"}]]
-         [:div.field
+         (comment[:div.field
           [:label.label "Select Password"]
           [:input.input {:type "password" :placeholder "Select Password"}]]
          [:div.field
           [:label.label "Repeat Password"]
-          [:input.input {:type "password" :placeholder "Repeat Password"}]]
+          [:input.input {:type "password" :placeholder "Repeat Password"}]])
          [:div.field
           [:label.checkbox
            [:input.mr-2 {:type "checkbox"}]
@@ -405,8 +405,17 @@
          [:div.title.is-6.has-text "Profile"]]]
        [:div.columns.is-centered.is-mobile 
         [:div.column.is-3 "LinkedIn Profile : "]
-        [:div.column [:> LinkedIn {;:scope {["r_liteprofile" "r_emailaddress"]}
-                      :text "Update from LinkedIn"}] ]]
+        [:div.column [:> LinkedIn {:clientId "770oybidvwk966"
+                                   :scope ["r_liteprofile" "r_emailaddress"]
+                                   :redirectUri "http://localhost:8280"
+                                   :onFailure (fn [event]
+                                                 (.log js/console "raghu")
+                                                (.log js/console event))
+                                   :onSuccess (fn [event]
+                                                (.log js/console "raghu")
+                                                (.log js/console event))
+
+                                   :text "Import from LinkedIn"}] ]]
        (for [item [[{:margin 3 :label "Last Updated : "}
                     {:margin 0 :label "Jan 20 2021"}]
                    [{:margin 3 :label "Photo : "}
@@ -526,8 +535,17 @@
             "Profile Setup"]]]
         [:div.columns.is-centered.is-mobile
          [:div.column.is-3 "LinkedIn Profile : "]
-         [:div.column [:> LinkedIn {;:scope {["r_liteprofile" "r_emailaddress"]}
-                                    :text "Import from LinkedIn"}]]]
+         [:div.column [:> LinkedIn  {:clientId "770oybidvwk966"
+                                     :scope ["r_liteprofile" "r_emailaddress"]
+                                     :redirectUri "http://localhost:8280"
+                                     :onFailure (fn [event]
+                                                  (.log js/console "raghu")
+                                                  (.log js/console event))
+                                     :onSuccess (fn [event]
+                                                  (.log js/console "raghu")
+                                                  (.log js/console event))
+
+                                     :text "Update from LinkedIn"}]]]
         (for [item [
                     [{:margin 3 :label "Last Updated : "}
                      {:margin 0 :label "Jan 20 2021"}]

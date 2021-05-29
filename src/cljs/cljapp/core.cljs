@@ -37,8 +37,8 @@
 
 (def root-view
   (reagent/adapt-react-class
-   ;(withAuthenticator
-   (reagent/reactify-component page) ;true)
+   (withAuthenticator
+   (reagent/reactify-component page) true)
    ))
 
 
@@ -48,8 +48,7 @@
 (def router
   (reitit/router
    [["/" {:name        :home
-          :view        #'views/home-page
-          :controllers [{:start (fn [_] (re-frame/dispatch [:page/init-home]))}]}]
+          :view        #'views/home-page}]
     ["/login" {:name :login
                :view #'views/login-page}]
     ["/signup" {:name :signup
