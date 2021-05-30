@@ -477,7 +477,7 @@
        [:div.columns.is-centered.is-mobile 
         [:div.column.is-3 "LinkedIn Profile : "]
         [:div.column [:button.button {:on-click #(.open js/window
-                                                        "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=770oybidvwk966&redirect_uri=http://localhost:3000/linkedin&state=ykx7m&scope=r_liteprofile%20r_emailaddress"
+                                                        "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=770oybidvwk966&redirect_uri=https://excess-obsolete.herokuapp.com/linkedin&state=ykx7m&scope=r_liteprofile%20r_emailaddress"
                                                         "_self")} "Import from LinkedIn"]]]
        (for [item [[{:margin 3 :label "Last Updated : "}
                     {:margin 0 :label "Jan 20 2021"}]
@@ -599,7 +599,7 @@
         [:div.columns.is-centered.is-mobile
          [:div.column.is-3 "LinkedIn Profile : "]
          [:div.column [:button.button {:on-click #(.open js/window
-                                                         "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=770oybidvwk966&redirect_uri=http://localhost:3000/linkedin&state=ykx7m&scope=r_liteprofile%20r_emailaddress"
+                                                         "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=770oybidvwk966&redirect_uri=https://excess-obsolete.herokuapp.com/linkedin&state=ykx7m&scope=r_liteprofile%20r_emailaddress"
                                                          "_self")} "Import from LinkedIn"]]]
         (for [item [
                     [{:margin 3 :label "Last Updated : "}
