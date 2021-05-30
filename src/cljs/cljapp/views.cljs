@@ -3,6 +3,9 @@
    [re-frame.core :as re-frame]
    [cljapp.events :as events]
    [reagent.core :as r]
+   [reitit.frontend.easy :as rfe]
+   ["aws-amplify" :as amp]
+   [reagent.cookies :as cookies]
    ["semantic-ui-react" :as ui]
    ["linkedin-login-for-react" :as lnk :default LinkedIn]
    [cljapp.subs :as subs]))
@@ -22,10 +25,10 @@
 
  
 (defn navbar []
-[:div.columns.is-centered.is-vcentered.is-mobile
+[:div.columns.is-centered.is-vcentered.is-mobile.p-4
    [:div.column [:a {:href "/#/" :style {:font-size 18 :font-weight "bold"}} "GIGION"]]
-   [:div.column.is-6 [:a {:href "/#/" :style {:font-size 18 :font-weight "bold"}} "HOME PAGE"]]
-   [:div.column.is-1 [:a {:href "/#/user-account"} "My Account"]]])
+   [:div.column.is-6 [:a {:href "/#/" :style {:font-size 18 :font-weight "bold"}} (str "HOME PAGE"  @(re-frame/subscribe [:error-msg]))]]
+   [:div.column.is-1 [:a {:href "/#/login"} "Sign In"]]])
 
 (defn item [title link description]
   [:div.box.p-5
@@ -73,6 +76,7 @@
     ))
 
 (defn login-page []
+  (let [fields (r/atom {})]
   (fn []
     [:div.section
      [:div.container.is-fluid.mt-5.pt-5
@@ -80,7 +84,8 @@
        [:div.column]
        [:div.column.is-4.m-1
         [:label.box.label.is-medium.has-text-centered "Sign In"]]
-       [:div.column]]
+       [:div.column
+        ]]
 
       [:div.columns.is-entered
        [:div.column]
@@ -88,23 +93,35 @@
         [:form.box
          [:div.field
           [:label.label "Email"]
-          [:input.input {:type "email" :placeholder "e.g bobsmith@gmail.com"}]]
+          [:input.input {:type "email" 
+                          :on-change #(swap! fields assoc :email (-> % .-target .-value))
+                         :placeholder "e.g bobsmith@gmail.com"}]]
          [:div.field
           [:label.label "Password"]
-          [:input.input {:type "password" :placeholder "***********" :required true}]]
+          [:input.input {:type "password" 
+                         :on-change #(swap! fields assoc :password (-> % .-target .-value))
+                         :placeholder "***********" :required true}]]
          [:div.field
           [:label.label.is-info "Forgot Password?"]]
          [:div.columns.is-centered.is-mobile
           [:div.column.is-offset-1
            [:button.button
-            [:a {:href "/#/"} "Back"]]]
+            [:div {:on-click #(rfe/push-state :home)} "Back"]]
+          ]
           [:div.column.is-offset-1
            [:button.button
-            [:a {:href "/#/user-account"} "Sign In"]]]]]]
-       [:div.column]]]]))
+            [:div {:on-click #(-> (.signIn amp/Auth (:email @fields) (:password @fields))
+                                                  (.then (fn [x] 
+                                                           (do (.log js/console x)
+                                                               (rfe/push-state :account))))
+                                                  (.catch (fn [x] (do (.log js/console (js->clj x :keywordize-keys true))
+                                                                      (re-frame/dispatch [:error-msg (:message (js->clj x :keywordize-keys true))])
+                                                                      ))))} "Sign In"]]]]]]
+       [:div.column]]]])))
 
 
 (defn signup-page []
+  (let [fields (r/atom {})]
   (fn []
     [:div.section
      [:div.container.is-fluid.mt-5.pt-5
@@ -117,18 +134,31 @@
         [:form.box
          [:div.field
           [:label.label "First Name"]
-          [:input.input {:type "text" :placeholder "First Name"}]]
+          [:input.input {:type "text" 
+                         :on-change #(swap! fields assoc :username (-> % .-target .-value))
+                         :placeholder "First Name"}]]
 
          [:div.field
           [:label.label "Last Name"]
-          [:input.input {:type "text" :placeholder "Last Name"}]]
+          [:input.input {:type "text" 
+                         :on-change #(swap! fields assoc :lastname (-> % .-target .-value))
+                         :placeholder "Last Name"}]]
          [:div.field
           [:label.label "Email"]
-          [:input.input {:type "text" :placeholder "Email"}]]
-         (comment[:div.field
-          [:label.label "Select Password"]
-          [:input.input {:type "password" :placeholder "Select Password"}]]
+          [:input.input {:type "text" 
+                         :on-change #(swap! fields assoc :email (-> % .-target .-value))
+                         :placeholder "Email"}]]
          [:div.field
+          [:label.label "Phone Number"]
+          [:input.input {:type "text"
+                         :on-change #(swap! fields assoc :phone_number (-> % .-target .-value))
+                         :placeholder "Phone NUmber"}]]
+         [:div.field
+          [:label.label "Select Password"]
+          [:input.input {:type "password" 
+                         :on-change #(swap! fields assoc :password (-> % .-target .-value))
+                         :placeholder "Select Password"}]]
+         (comment[:div.field
           [:label.label "Repeat Password"]
           [:input.input {:type "password" :placeholder "Repeat Password"}]])
          [:div.field
@@ -140,10 +170,51 @@
          [:div.columns.is-centered.is-mobile
           [:div.column.is-offset-1
            [:button.button
-            [:a {:href "/#/"} "Back"]]]
+            [:div {:on-click #(rfe/push-state :home)} "Back"]]]
           [:div.column.is-offset-1
            [:button.button
-            [:a {:href "/#/user-account-services"} "Sign Up"]]]]]]]]]))
+            [:div {:on-click #(-> (.signUp amp/Auth (:email @fields) (:password @fields))
+                                (.then (fn [x] (do (.log js/console x)
+                                                   (rfe/push-state :confirm-signup))))
+                                (.catch (fn [x] (do (re-frame/dispatch [:error-msg (:message (js->clj x :keywordize-keys true))])
+                                                    (.log js/console x)))))
+                 } "Sign Up"]]]]]]]]])))
+
+(defn confirm-signup-page []
+  (let [fields (r/atom {})]
+    (fn []
+      [:div.section
+       [:div.container.is-fluid.mt-5.pt-5
+
+        [:div.columns.is-centered
+         [:div.column.is-5
+          [:label.box.label.is-medium.has-text-centered "Sign Up"]]]
+        [:div.columns.is-centered
+         [:div.column.is-5
+          [:form.box
+           [:div.field
+            [:label.label "Email"]
+            [:input.input {:type "text"
+                           :on-change #(swap! fields assoc :email (-> % .-target .-value))
+                           :placeholder "Email"}]]
+           [:div.field
+            [:label.label "Code"]
+            [:input.input {:type "text"
+                           :on-change #(swap! fields assoc :code (-> % .-target .-value))
+                           :placeholder "Code"}]]
+           
+
+           [:div.columns.is-centered.is-mobile
+            [:div.column.is-offset-1
+             [:button.button
+              [:div {:on-click #(rfe/push-state :home)} "Back"]]]
+            [:div.column.is-offset-1
+             [:button.button
+              [:div {:on-click #(-> (.confirmSignUp amp/Auth (:email @fields) (:code @fields))
+                                  (.then (fn [x] (do (.log js/console x)
+                                                     (rfe/push-state :login))))
+                                  (.catch (fn [x] (do (re-frame/dispatch [:error-msg (:message (js->clj x :keywordize-keys true))])
+                                                      (.log js/console x)))))} "Sign Up"]]]]]]]]])))
 
 (defn service-log-page []
   (fn []
@@ -405,25 +476,17 @@
          [:div.title.is-6.has-text "Profile"]]]
        [:div.columns.is-centered.is-mobile 
         [:div.column.is-3 "LinkedIn Profile : "]
-        [:div.column [:> LinkedIn {:clientId "770oybidvwk966"
-                                   :scope ["r_liteprofile" "r_emailaddress"]
-                                   :redirectUri "http://localhost:8280"
-                                   :onFailure (fn [event]
-                                                 (.log js/console "raghu")
-                                                (.log js/console event))
-                                   :onSuccess (fn [event]
-                                                (.log js/console "raghu")
-                                                (.log js/console event))
-
-                                   :text "Import from LinkedIn"}] ]]
+        [:div.column [:button.button {:on-click #(.open js/window
+                                                        "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=770oybidvwk966&redirect_uri=http://localhost:3000/linkedin&state=ykx7m&scope=r_liteprofile%20r_emailaddress"
+                                                        "_self")} "Import from LinkedIn"]]]
        (for [item [[{:margin 3 :label "Last Updated : "}
                     {:margin 0 :label "Jan 20 2021"}]
-                   [{:margin 3 :label "Photo : "}
-                    {:margin 0 :label [:figure]}]
+                   [{:margin 3 :label (str "Photo : " (cookies/get "pic"))}
+                    {:margin 0 :label [:figure {:src "urn:li:digitalmediaAsset:C5603AQFanMgZSxfTEA"}]}]
                    [{:margin 3 :label "Work Experience : "}
-                    {:margin 0 :label ""}]
+                    {:margin 0 :label (cookies/get "fName")}]
                    [{:margin 3 :label "Internship : "}
-                    {:margin 0 :label ""}]
+                    {:margin 0 :label (cookies/get "lName")}]
                    [{:margin 3 :label "Scholarship : "}
                     {:margin 0 :label ""}]
                    [{:margin 3 :label "Publications : "}
@@ -535,17 +598,9 @@
             "Profile Setup"]]]
         [:div.columns.is-centered.is-mobile
          [:div.column.is-3 "LinkedIn Profile : "]
-         [:div.column [:> LinkedIn  {:clientId "770oybidvwk966"
-                                     :scope ["r_liteprofile" "r_emailaddress"]
-                                     :redirectUri "http://localhost:8280"
-                                     :onFailure (fn [event]
-                                                  (.log js/console "raghu")
-                                                  (.log js/console event))
-                                     :onSuccess (fn [event]
-                                                  (.log js/console "raghu")
-                                                  (.log js/console event))
-
-                                     :text "Update from LinkedIn"}]]]
+         [:div.column [:button.button {:on-click #(.open js/window
+                                                         "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=770oybidvwk966&redirect_uri=http://localhost:3000/linkedin&state=ykx7m&scope=r_liteprofile%20r_emailaddress"
+                                                         "_self")} "Import from LinkedIn"]]]
         (for [item [
                     [{:margin 3 :label "Last Updated : "}
                      {:margin 0 :label "Jan 20 2021"}]

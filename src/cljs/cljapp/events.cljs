@@ -40,3 +40,10 @@
  :common/set-error
  (fn [db [_ error]]
    (assoc db :common/error error)))
+
+
+(re-frame/reg-event-db
+ :error-msg
+ (fn [db [_ error]]
+   (assoc db :error-msg error)))
+

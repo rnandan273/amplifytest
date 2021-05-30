@@ -33,3 +33,8 @@
  :common/error
  (fn [db _]
    (:common/error db)))
+
+(re-frame/reg-sub
+ :error-msg
+ (fn [db _]
+   (:error-msg db)))

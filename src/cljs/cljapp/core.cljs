@@ -37,8 +37,8 @@
 
 (def root-view
   (reagent/adapt-react-class
-   (withAuthenticator
-   (reagent/reactify-component page) true)
+   ;(withAuthenticator
+   (reagent/reactify-component page) ;true)
    ))
 
 
@@ -53,6 +53,8 @@
                :view #'views/login-page}]
     ["/signup" {:name :signup
                 :view #'views/signup-page}]
+    ["/confirm-signup" {:name :confirm-signup
+                :view #'views/confirm-signup-page}]
     ["/user-account" {:name :account
                                   :view #'views/account}]
     ["/user-account-service-log" {:name :service-log
